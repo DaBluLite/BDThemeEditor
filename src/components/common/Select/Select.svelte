@@ -4,6 +4,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { ChevronUpDown, Check } from '@steeze-ui/heroicons';
 	import { Button } from '../';
+	import { scale } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
 
@@ -15,13 +16,13 @@
 		value: string;
 	}
 
-	export let options: Option[];
+	export let options: Option[] = [];
 	export let value: string = '';
 	export let custom: boolean = false;
 
 	// Values
-	$: selected = options.find((el) => el.value === value) || options[0];
-	let customValue: string;
+	$: selected = options?.find((el) => el.value === value) || options[0];
+	let customValue: string = '';
 
 	// Dropdown
 	let selectBtn: HTMLButtonElement;
@@ -63,6 +64,7 @@
 					exclude: selectBtn,
 					callback: hide
 				}}
+				transition:scale={{ start: 0.95, duration: 150 }}
 			>
 				{#each options as option}
 					<button class="option" class:active={selected.value === option.value} on:click={() => setOption(option)}>

@@ -1,14 +1,15 @@
 <script lang="ts">
 	import { themes } from '$data/themes';
+	import { tooltip } from 'svooltip';
+	import { Icon } from '@steeze-ui/svelte-icon';
+	import { MagnifyingGlass, XMark } from '@steeze-ui/heroicons';
 
 	import { getSlug } from '$lib/utils';
-	import { MetaData, Input, Checkbox, Modal, Button } from '$components/common';
+	import { MetaData, Button } from '$components/common';
 	import { Developer } from '$components/editor';
-	import { Icon } from '@steeze-ui/svelte-icon';
-	import { Funnel } from '@steeze-ui/heroicons';
 
 	import type { Feature } from '$types/theme';
-	import type { IDev } from '$types/dev';
+	import type { Developer as Dev } from '$types/dev';
 
 	let search: string = '';
 	let selectedFeatures: Feature[] = [];
@@ -26,9 +27,8 @@
 		{ value: 'home', label: 'Home button', description: 'Support for a custom home button image.' }
 	];
 	let searchEl: HTMLInputElement;
-	let developer: IDev;
+	let developer: Dev;
 	let developerModal: boolean = false;
-	let sortModal: boolean = false;
 
 	$: filtered = themes.filter((el) => {
 		const val = search.toLowerCase();
@@ -50,7 +50,7 @@
 		if (selectedFeatures.includes(_value)) selectedFeatures = selectedFeatures.filter((el) => el !== _value);
 		else selectedFeatures = [...selectedFeatures, _value];
 	};
-	const setDeveloper = (dev: IDev) => {
+	const setDeveloper = (dev: Dev) => {
 		developer = dev;
 		developerModal = true;
 	};
@@ -71,32 +71,43 @@
 
 <Developer bind:visible={developerModal} {developer} />
 
-<Modal
-	bind:visible={sortModal}
-	title="Theme Selection Sorting"
-	description="Select what features you wish your desired theme to have."
->
-	<div class="sorting">
-		{#each features as { value, label, description }}
-			<button type="button" class="sort" class:active={isSelectedFeature(value)} on:click={() => setFeature(value)}>
-				<p class="sort-label">{label}</p>
-				<span class="sort-description">{description}</span>
-			</button>
-		{/each}
-	</div>
-</Modal>
-
 <template>
-	<div class="pattern" />
 	<header class="header">
 		<div class="wrap">
-			<h2 class="title">Available themes <span class="count">{filtered.length}</span></h2>
-			<div class="header-filters">
-				<Input bind:self={searchEl} bind:value={search} placeholder="Quick search" />
-				<Button variant="secondary" on:click={() => (sortModal = !sortModal)}>
-					<Icon src={Funnel} />
-					Sort
-				</Button>
+			<h2 class="title">Select A Theme <span class="count">{filtered.length}</span></h2>
+			<div class="features">
+				{#each features as { value, label, description }}
+					<button
+						type="button"
+						class="feature"
+						role="checkbox"
+						aria-checked={isSelectedFeature(value)}
+						on:click={() => setFeature(value)}
+						use:tooltip={{ content: description, placement: 'top-start' }}
+					>
+						<div class="box" />
+						{label}
+					</button>
+				{/each}
+			</div>
+			<div class="search">
+				<div class="search-icon">
+					<Icon src={MagnifyingGlass} />
+				</div>
+				<input
+					bind:this={searchEl}
+					bind:value={search}
+					class="search-box"
+					placeholder="Search for name, developer, ect..."
+					type="text"
+				/>
+				{#if search.length}
+					<div class="search-reset">
+						<Button variant="secondary" on:click={() => (search = '')}>
+							<Icon src={XMark} />
+						</Button>
+					</div>
+				{/if}
 			</div>
 		</div>
 	</header>
@@ -118,36 +129,17 @@
 			</div>
 		{/each}
 	</div>
+	<footer class="footer">
+		<div class="wrap">
+			<p>Website created by <a href="https://gibbu.me" target="_blank" rel="noreferrer noopener">Gibbu</a></p>
+		</div>
+	</footer>
 </template>
 
 <style lang="scss">
 	.header {
 		position: relative;
-		height: 300px;
-		display: flex;
-		align-items: center;
-		.wrap {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-		&-filters {
-			display: flex;
-			gap: 16px;
-			align-items: center;
-		}
-	}
-	.pattern {
-		position: absolute;
-		height: 100%;
-		width: 100%;
-		top: 0;
-		left: 0;
-		background: url('/images/grid-pattern.png');
-		opacity: 0.035;
-		mask: linear-gradient(transparent, black);
-		rotate: 180deg;
-		z-index: -1;
+		padding: 100px 0 64px;
 	}
 	.title {
 		font-family: var(--font-display);
@@ -167,11 +159,96 @@
 		}
 	}
 
+	.features {
+		display: flex;
+		gap: 12px;
+		margin: 50px 0 16px;
+		flex-wrap: wrap;
+	}
+	.feature {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		border: 1px solid var(--border-alt);
+		padding: 8px 12px;
+		border-radius: var(--radius);
+		font-size: 14px;
+		white-space: nowrap;
+		overflow: hidden;
+		background: var(--background-tertiary);
+		.box {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 18px;
+			max-width: 18px;
+			min-height: 18px;
+			max-height: 18px;
+			border-radius: 50px;
+			border: 1px solid var(--border-alt);
+			position: relative;
+			&::before {
+				content: '';
+				width: 10px;
+				height: 5px;
+				border-left: 2px solid #fff;
+				border-bottom: 2px solid #fff;
+				rotate: -45deg;
+				translate: 0 -1px;
+				opacity: 0;
+			}
+		}
+		&[aria-checked='true'] {
+			border-color: hsl(var(--accent));
+			.box {
+				background: hsl(var(--accent) / 0.25);
+				border-color: transparent;
+				&::before {
+					border-color: hsl(var(--accent));
+					opacity: 1;
+				}
+			}
+		}
+		&:focus-visible {
+			outline: 2px solid hsl(var(--accent));
+			outline-offset: 2px;
+		}
+	}
+	.search {
+		position: relative;
+		display: flex;
+		align-items: center;
+		&-icon {
+			width: 20px;
+			height: 20px;
+			left: 16px;
+			position: absolute;
+			color: var(--text-tertiary);
+		}
+		&-box {
+			font-size: 14px;
+			background: var(--background-tertiary);
+			border: 1px solid var(--border-alt);
+			border-radius: var(--radius);
+			padding: 12px 64px 12px 50px;
+			width: 100%;
+			&:focus {
+				border-color: hsl(var(--accent));
+				box-shadow: 0 0 0 5px hsl(var(--accent) / 0.25);
+			}
+		}
+		&-reset {
+			position: absolute;
+			right: 4px;
+		}
+	}
+
 	.themes {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(356px, 1fr));
 		gap: 32px;
 		margin-bottom: 128px;
+		flex: 1 0 auto;
 	}
 	.theme {
 		&-head {
@@ -180,10 +257,14 @@
 			overflow: hidden;
 			border-radius: var(--radius-lg);
 			position: relative;
-			transition: translate 0.15s ease, box-shadow 0.15s ease;
-			&:hover {
-				translate: 0 -5px;
-				box-shadow: 0 10px 13px hsl(0 0% 0% / 0.25);
+			transition: outline 0.15s ease, outline-offset 0.15s ease;
+			background: var(--background-primary);
+			outline: 3px solid transparent;
+			outline-offset: 0;
+			&:hover,
+			&:focus {
+				outline-color: hsl(var(--accent));
+				outline-offset: 4px;
 			}
 		}
 		&-thumbnail {
@@ -216,6 +297,7 @@
 		align-items: center;
 		gap: 8px;
 		margin-top: 4px;
+		border-radius: var(--radius);
 		&-avatar {
 			display: block;
 			border-radius: 50%;
@@ -228,35 +310,42 @@
 			color: hsl(var(--accent));
 			text-decoration: underline;
 		}
+		&:focus-visible {
+			outline: 2px solid hsl(var(--accent));
+			outline-offset: 2;
+		}
 	}
 
-	.sorting {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 16px;
-	}
-	.sort {
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
-		text-align: left;
-		padding: 16px;
-		&-label {
-			color: var(--text-primary);
-			font-family: var(--font-display);
-			font-weight: 800;
+	.footer {
+		padding: 75px 0 50px;
+		position: relative;
+		font-size: 14px;
+		user-select: none;
+		&::before {
+			content: '';
+			position: absolute;
+			inset: 0;
+			background: url('/images/background.png');
+			mask: linear-gradient(transparent, black);
+			opacity: 0.75;
 		}
-		&-description {
-			display: block;
-			margin-top: 4px;
-			font-size: 14px;
+		.wrap {
+			position: relative;
+			z-index: 1;
+			opacity: 0.5;
+			display: flex;
+			justify-content: space-between;
 		}
-		&:hover {
-			border-color: var(--border-alt);
-		}
-		&.active {
-			background: hsl(var(--accent) / 0.075);
-			border-color: hsl(var(--accent));
-			color: var(--text-primary);
+		a {
+			color: hsl(var(--accent));
+			&:hover {
+				text-decoration: underline;
+			}
+			&:focus-visible {
+				outline: 2px solid hsl(var(--accent));
+				outline-offset: 2px;
+				border-radius: var(--radius);
+			}
 		}
 	}
 </style>

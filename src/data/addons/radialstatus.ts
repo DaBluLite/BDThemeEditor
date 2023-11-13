@@ -1,7 +1,7 @@
-import type { IAddon } from '$types/addon';
+import type { Addon } from '$types/addon';
 import Gibbu from '../devs/gibbu';
 
-const addon: IAddon = {
+const addon: Addon = {
 	name: 'RadialStatus',
 	description: 'Changes the status icons to wrap around the avatar.',
 	developer: Gibbu,
@@ -13,150 +13,138 @@ const addon: IAddon = {
 	variables: [
 		{
 			type: 'slider',
-			details: {
+			props: {
 				variable: 'rs-small-spacing',
 				value: 2,
 				unit: 'px',
 				max: 10,
 				step: 1,
 				title: 'Small avatar spacing',
-				hint: 'Chat, members, dms',
-				addon: true
+				hint: 'Chat, members, dms'
 			}
 		},
 		{
 			type: 'slider',
-			details: {
+			props: {
 				variable: 'rs-medium-spacing',
 				value: 2,
 				unit: 'px',
 				max: 10,
 				step: 1,
 				title: 'Medium avatar spacing',
-				hint: 'User popout',
-				addon: true
+				hint: 'User popout'
 			}
 		},
 		{
 			type: 'slider',
-			details: {
+			props: {
 				variable: 'rs-large-spacing',
 				value: 2,
 				unit: 'px',
 				max: 10,
 				step: 1,
 				title: 'Large avatar spacing',
-				hint: 'User profiles',
-				addon: true
+				hint: 'User profiles'
 			}
 		},
 		{
 			type: 'slider',
-			details: {
+			props: {
 				variable: 'rs-small-width',
 				value: 2,
 				unit: 'px',
 				max: 5,
 				step: 0.5,
 				title: 'Small width',
-				hint: 'Thickness of the status border for members list/dms',
-				addon: true
+				hint: 'Thickness of the status border for members list/dms'
 			}
 		},
 		{
 			type: 'slider',
-			details: {
+			props: {
 				variable: 'rs-medium-width',
 				value: 2,
 				unit: 'px',
 				max: 5,
 				step: 0.5,
 				title: 'Medium width',
-				hint: 'Thickness of the status border for User popout',
-				addon: true
+				hint: 'Thickness of the status border for User popout'
 			}
 		},
 		{
 			type: 'slider',
-			details: {
+			props: {
 				variable: 'rs-large-width',
 				value: 2,
 				unit: 'px',
 				max: 5,
 				step: 0.5,
 				title: 'Large width',
-				hint: 'Thickness of the status border for User profile',
-				addon: true
+				hint: 'Thickness of the status border for User profile'
 			}
 		},
 		{
 			type: 'slider',
-			details: {
+			props: {
 				variable: 'rs-avatar-shape',
 				value: 50,
 				unit: '%',
 				max: 50,
 				step: 0.5,
 				title: 'Avatar shape',
-				hint: '0% = Square | 50% = Circle',
-				addon: true
+				hint: '0% = Square | 50% = Circle'
 			}
 		},
 		{
 			type: 'colour',
-			details: {
+			props: {
 				variable: 'rs-online-color',
 				value: '#43b581',
 				type: 'HEX',
-				title: 'Online status colour',
-				addon: true
+				title: 'Online status colour'
 			}
 		},
 		{
 			type: 'colour',
-			details: {
+			props: {
 				variable: 'rs-idle-color',
 				value: '#faa61a',
 				type: 'HEX',
-				title: 'Idle status colour',
-				addon: true
+				title: 'Idle status colour'
 			}
 		},
 		{
 			type: 'colour',
-			details: {
+			props: {
 				variable: 'rs-dnd-color',
 				value: '#f04747',
 				type: 'HEX',
-				title: 'Do not disturb status colour',
-				addon: true
+				title: 'Do not disturb status colour'
 			}
 		},
 		{
 			type: 'colour',
-			details: {
+			props: {
 				variable: 'rs-offline-color',
 				value: '#636b75',
 				type: 'HEX',
-				title: 'Offline status colour',
-				addon: true
+				title: 'Offline status colour'
 			}
 		},
 		{
 			type: 'colour',
-			details: {
+			props: {
 				variable: 'rs-streaming-color',
 				value: '#643da7',
 				type: 'HEX',
-				title: 'Streaming status colour',
-				addon: true
+				title: 'Streaming status colour'
 			}
 		},
 		{
 			type: 'select',
-			details: {
+			props: {
 				variable: 'rs-phone-visible',
-				customValue: false,
+				custom: false,
 				options: [
 					{ label: 'Visible', value: 'block' },
 					{ label: 'Hidden', value: 'none' }

@@ -2,8 +2,6 @@ import frostedglass from './frostedglass';
 import softx from './softx';
 import basicbackground from './basicbackground';
 import clearvision from './clearvision';
-// import reborn from './reborn';
-// import tranquil from './tranquil';
 import discordrecolor from './discordrecolor';
 import comfy from './comfy';
 import solana from './solana';
@@ -13,6 +11,10 @@ import operagxtheme from './operagxtheme';
 import outlook from './outlook';
 import cyan from './cyan';
 import darkmatter from './darkmatter';
+import translucence from './translucence';
+import materialdiscord from './materialdiscord';
+import steam from './steam';
+import minimalcord from './minimalcord';
 
 export const themes = [
 	frostedglass,
@@ -20,16 +22,18 @@ export const themes = [
 	basicbackground,
 	clearvision,
 	darkmatter,
-	comfy,
-	solana,
 	operagxtheme,
+	translucence,
+	solana,
 	outlook,
-	neutron,
 	cyan,
-	// reborn,
-	// tranquil,
+	comfy,
 	materialdesign,
+	neutron,
+	materialdiscord,
 	discordrecolor,
+	steam,
+	minimalcord
 ];
 
 export const fallbacks = themes.map((el) => el.name.replace(/ /g, '').toLowerCase());

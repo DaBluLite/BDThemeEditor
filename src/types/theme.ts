@@ -1,14 +1,19 @@
 import type { Inputs } from './inputs';
-import type { IDev } from './dev';
-import type { IAddon } from './addon';
+import type { Developer } from './dev';
+import type { Addon } from './addon';
+import type * as HeroIcons from '@steeze-ui/heroicons';
 
 export type Feature = 'background' | 'font' | 'transparent' | 'solid' | 'light' | 'addons' | 'home';
 
 interface ThemeVars {
 	/** The text to be displayed in the tooltip */
 	title: string;
-	/** The icon of the tab */
-	icon: string;
+	/**
+	 * Icon of the tab.
+	 *
+	 * View all available icons here: https://heroicons.com
+	 */
+	icon: keyof typeof HeroIcons;
 	/** The bread and butter */
 	inputs: Inputs[];
 	/** Describe what this tab is indended for. */
@@ -79,7 +84,7 @@ interface Meta {
 	authorId?: string;
 }
 
-export interface ITheme {
+export interface Theme {
 	/**
 	 * The name of your theme.\
 	 * Will be used as the slug and url for the editor.
@@ -90,7 +95,7 @@ export interface ITheme {
 	/** The image used for the theme listing page. */
 	thumbnail: string;
 	/** The developer of the theme. */
-	developer: IDev;
+	developer: Developer;
 	/** The BetterDiscord meta to be included with the downloaded file. */
 	meta: Meta;
 	/**
@@ -121,7 +126,7 @@ export interface ITheme {
 	/** The available selectors for variables to be placed. Such as `.theme-dark` and `.theme-light`. */
 	varGroups?: string[];
 	/** Any addons compatible addons. */
-	addons?: IAddon[];
+	addons?: Addon[];
 	/** The feature set of the theme. */
 	features?: Feature[];
 }
@@ -129,10 +134,10 @@ export interface ITheme {
 export interface IStoreTheme {
 	name: string;
 	meta: Meta;
-	developer: IDev;
+	developer: Developer;
 	imports: string[];
 	variables: ThemeVars[];
-	addons: IAddon[];
+	addons: Addon[];
 	optionalImports: OptionalImport[];
 	fonts?: string[];
 	hiddenVars?: HiddenVars[];

@@ -3,6 +3,7 @@
 	import { Modal, Banner, Dropzone } from '../common';
 	import { parseMeta, getUrl, stripVal } from '$lib/helpers';
 	import { preview } from '$lib/preview';
+	import { toast } from 'svoast';
 
 	export let visible: boolean = false;
 
@@ -10,7 +11,6 @@
 	let error: string;
 
 	const upload = () => {
-		console.log('wowzers');
 		const file = files[0];
 
 		const reader = new FileReader();
@@ -92,29 +92,30 @@
 
 					$store.variables.forEach((el) =>
 						el.inputs.forEach((input) => {
-							if (input.details.variable === variable) {
-								input.details.value = input.type === 'select' ? value : stripVal(value);
+							if (input.type !== 'banner' && input.type !== 'divider' && input.props.variable === variable) {
+								input.props.value = input.type === 'select' ? value : stripVal(value);
 							}
 						})
 					);
 					$store.addons.forEach((el) => {
 						if (el.variables) {
 							el.variables.forEach((input) => {
-								if (input.details.variable === variable) {
-									input.details.value = input.type === 'select' ? value : stripVal(value);
+								if (input.type !== 'banner' && input.type !== 'divider' && input.props.variable === variable) {
+									input.props.value = input.type === 'select' ? value : stripVal(value);
 								}
 							});
 						}
 					});
 
 					visible = false;
+					toast.success('Uploaded theme.');
 				}
 			});
 		});
 	};
 </script>
 
-<Modal bind:visible title="Select a theme to upload" size="small">
+<Modal bind:visible title="Upload" size="small">
 	<Banner type={error ? 'error' : 'info'}>
 		{error || `Only ${$store.name} themes that have been downloaded through this editor can be uploaded.`}
 	</Banner>

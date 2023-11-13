@@ -1,8 +1,8 @@
-import type { ITheme } from '$types/theme';
+import type { Theme } from '$types/theme';
 import ClearVision from '../devs/clearvision';
 import { hsl, columns, radialstatus, discolored } from '../addons';
 
-const theme: ITheme = {
+const theme: Theme = {
 	name: 'Clear Vision',
 	thumbnail: 'https://raw.githubusercontent.com/ClearVision/ClearVision-v6/master/screenshots/6-stable.4.7.9.png',
 	developer: ClearVision,
@@ -108,7 +108,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'main-color',
 						value: '#2780e6',
 						type: 'HEX',
@@ -117,7 +117,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'hover-color',
 						value: '#1e63b3',
 						type: 'HEX',
@@ -127,7 +127,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'success-color',
 						value: '#43b581',
 						type: 'HEX',
@@ -136,7 +136,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'danger-color',
 						value: '#982929',
 						type: 'HEX',
@@ -145,7 +145,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'url-color',
 						value: 'var(--main-color)',
 						type: 'HEX',
@@ -159,8 +159,18 @@ const theme: ITheme = {
 			icon: 'Photo',
 			inputs: [
 				{
+					type: 'banner',
+					props: {
+						id: 'cv-transparency-window',
+						type: 'warning',
+						message:
+							'ClearVision requires aditional steps to achieve a see through window. Join their <a href="https://discord.gg/673e2sqBzd" rel="noopener noreferrer">Discord Server</a> for help.',
+						closable: true
+					}
+				},
+				{
 					type: 'image',
-					details: {
+					props: {
 						variable: 'background-image',
 						start: 'https://clearvision.github.io/images/sapphire.jpg',
 						value: '',
@@ -169,7 +179,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'background-shading',
 						value: 100,
 						unit: '%',
@@ -180,7 +190,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'background-position',
 						value: 'center',
 						options: [
@@ -194,13 +204,13 @@ const theme: ITheme = {
 							{ label: 'Bottom centre', value: 'Bottom center' },
 							{ label: 'Bottom right', value: 'bottom right' }
 						],
-						customValue: true,
+						custom: true,
 						title: 'Position'
 					}
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'background-size',
 						value: 'cover',
 						options: [
@@ -211,15 +221,15 @@ const theme: ITheme = {
 							{ label: '150%', value: '150%' },
 							{ label: '200%', value: '200%' }
 						],
-						customValue: true,
+						custom: true,
 						title: 'Size'
 					}
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'background-repeat',
-						customValue: false,
+						custom: false,
 						value: 'no-repeat',
 						options: [
 							{ label: 'True', value: 'repeat' },
@@ -230,9 +240,9 @@ const theme: ITheme = {
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'background-attachment',
-						customValue: false,
+						custom: false,
 						value: 'fixed',
 						options: [
 							{ label: 'True', value: 'fixed' },
@@ -243,7 +253,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'background-brightness',
 						value: 100,
 						unit: '%',
@@ -255,7 +265,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'background-contrast',
 						value: 100,
 						unit: '%',
@@ -267,7 +277,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'background-saturation',
 						value: 100,
 						unit: '%',
@@ -279,7 +289,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'background-grayscale',
 						value: 0,
 						unit: '%',
@@ -290,7 +300,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'background-invert',
 						value: 0,
 						unit: '%',
@@ -301,7 +311,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'background-blur',
 						value: 0,
 						unit: 'px',
@@ -312,7 +322,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'background-overlay',
 						value: 'rgba(0,0,0,0.6)',
 						type: 'RGB',
@@ -329,7 +339,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'image',
-					details: {
+					props: {
 						variable: 'user-popout-image',
 						start: 'https://clearvision.github.io/images/sapphire.jpg',
 						value: '',
@@ -338,7 +348,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-popout-position',
 						value: 'center',
 						options: [
@@ -352,13 +362,13 @@ const theme: ITheme = {
 							{ label: 'Bottom centre', value: 'Bottom center' },
 							{ label: 'Bottom right', value: 'bottom right' }
 						],
-						customValue: true,
+						custom: true,
 						title: 'Position'
 					}
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-popout-size',
 						value: 'cover',
 						options: [
@@ -369,15 +379,15 @@ const theme: ITheme = {
 							{ label: '150%', value: '150%' },
 							{ label: '200%', value: '200%' }
 						],
-						customValue: true,
+						custom: true,
 						title: 'Size'
 					}
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-popout-repeat',
-						customValue: false,
+						custom: false,
 						value: 'no-repeat',
 						options: [
 							{ label: 'True', value: 'repeat' },
@@ -388,9 +398,9 @@ const theme: ITheme = {
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-popout-attachment',
-						customValue: false,
+						custom: false,
 						value: 'fixed',
 						options: [
 							{ label: 'True', value: 'fixed' },
@@ -401,7 +411,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-popout-brightness',
 						value: 100,
 						unit: '%',
@@ -413,7 +423,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-popout-contrast',
 						value: 100,
 						unit: '%',
@@ -425,7 +435,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-popout-saturation',
 						value: 100,
 						unit: '%',
@@ -437,7 +447,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-popout-grayscale',
 						value: 0,
 						unit: '%',
@@ -448,7 +458,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-popout-invert',
 						value: 0,
 						unit: '%',
@@ -459,7 +469,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-popout-blur',
 						value: 3,
 						unit: 'px',
@@ -477,7 +487,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'image',
-					details: {
+					props: {
 						variable: 'user-modal-image',
 						start: 'https://clearvision.github.io/images/sapphire.jpg',
 						value: '',
@@ -486,7 +496,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-modal-position',
 						value: 'center',
 						options: [
@@ -500,13 +510,13 @@ const theme: ITheme = {
 							{ label: 'Bottom centre', value: 'Bottom center' },
 							{ label: 'Bottom right', value: 'bottom right' }
 						],
-						customValue: true,
+						custom: true,
 						title: 'Position'
 					}
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-modal-size',
 						value: 'cover',
 						options: [
@@ -517,15 +527,15 @@ const theme: ITheme = {
 							{ label: '150%', value: '150%' },
 							{ label: '200%', value: '200%' }
 						],
-						customValue: true,
+						custom: true,
 						title: 'Size'
 					}
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-modal-repeat',
-						customValue: false,
+						custom: false,
 						value: 'no-repeat',
 						options: [
 							{ label: 'True', value: 'repeat' },
@@ -536,9 +546,9 @@ const theme: ITheme = {
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'user-modal-attachment',
-						customValue: false,
+						custom: false,
 						value: 'fixed',
 						options: [
 							{ label: 'True', value: 'fixed' },
@@ -549,7 +559,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-modal-brightness',
 						value: 100,
 						unit: '%',
@@ -561,7 +571,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-modal-contrast',
 						value: 100,
 						unit: '%',
@@ -573,7 +583,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-modal-saturation',
 						value: 100,
 						unit: '%',
@@ -585,7 +595,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-modal-grayscale',
 						value: 0,
 						unit: '%',
@@ -596,7 +606,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-modal-invert',
 						value: 0,
 						unit: '%',
@@ -607,7 +617,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'slider',
-					details: {
+					props: {
 						variable: 'user-modal-blur',
 						value: 3,
 						unit: 'px',
@@ -624,7 +634,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'image',
-					details: {
+					props: {
 						variable: 'home-icon',
 						start: 'https://clearvision.github.io/icons/discord.svg',
 						value: '',
@@ -633,7 +643,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'select',
-					details: {
+					props: {
 						variable: 'home-position',
 						value: 'center',
 						options: [
@@ -645,13 +655,13 @@ const theme: ITheme = {
 							{ label: 'Bottom centre', value: 'bottom center' },
 							{ label: 'Bottom left', value: 'bottom left' }
 						],
-						customValue: true,
+						custom: true,
 						title: 'Position'
 					}
 				},
 				{
 					type: 'number',
-					details: {
+					props: {
 						variable: 'home-size',
 						value: 40,
 						unit: 'px',
@@ -666,7 +676,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'channel-unread',
 						value: 'var(--main-color)',
 						type: 'HEX',
@@ -675,7 +685,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'channel-color',
 						value: 'rgba(255,255,255,0.3)',
 						type: 'RGB',
@@ -686,7 +696,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'muted-color',
 						value: 'rgba(255,255,255,0.1)',
 						type: 'RGB',
@@ -703,7 +713,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'online-color',
 						value: '#43b581',
 						type: 'HEX',
@@ -712,7 +722,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'idle-color',
 						value: '#faa61a',
 						type: 'HEX',
@@ -721,7 +731,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'dnd-color',
 						value: '#982929',
 						type: 'HEX',
@@ -730,7 +740,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'streaming-color',
 						value: '#593695',
 						type: 'HEX',
@@ -739,7 +749,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'colour',
-					details: {
+					props: {
 						variable: 'offline-color',
 						value: '#808080',
 						type: 'HEX',
@@ -754,7 +764,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'font',
-					details: {
+					props: {
 						variable: 'main-font',
 						value: 'gg sans',
 						index: 0,
@@ -763,7 +773,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'font',
-					details: {
+					props: {
 						variable: 'code-font',
 						value: 'Consolas',
 						index: 1,
@@ -778,7 +788,7 @@ const theme: ITheme = {
 			inputs: [
 				{
 					type: 'number',
-					details: {
+					props: {
 						variable: 'channels-width',
 						value: 220,
 						unit: 'px',
@@ -787,7 +797,7 @@ const theme: ITheme = {
 				},
 				{
 					type: 'number',
-					details: {
+					props: {
 						variable: 'members-width',
 						value: 240,
 						unit: 'px',

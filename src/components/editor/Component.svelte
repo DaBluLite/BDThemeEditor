@@ -3,13 +3,11 @@
 	import { varOutput } from '$lib/helpers';
 	import { preview } from '$lib/preview';
 
-	import { Colour, Font, Image, Slider, Select, Number } from '../inputs';
+	import { Colour, Font, Image, Slider, Select, Number, Banner, Divider } from '../inputs';
 
-	interface Details {
+	interface Props {
 		variable: string;
 		value: string;
-		unit?: string;
-		addon?: boolean;
 	}
 
 	const inputs = {
@@ -18,17 +16,20 @@
 		image: Image,
 		slider: Slider,
 		select: Select,
-		number: Number
+		number: Number,
+		banner: Banner,
+		divider: Divider
 	};
 
 	export let data: any;
+	export let addon: boolean = false;
 
 	const getType = (type: string) => {
 		return inputs[type as keyof typeof inputs];
 	};
 
-	const update = ({ detail }: { detail: Details }): void => {
-		let { variable, value, addon } = detail;
+	const update = ({ detail }: { detail: Props }): void => {
+		let { variable, value } = detail;
 
 		preview({
 			action: 'setProp',
@@ -40,13 +41,15 @@
 			$store.addons.forEach((group) => {
 				if (group.variables)
 					group.variables.forEach((input) => {
-						if (input.details.variable === variable) input.details.value = value;
+						if (input.type !== 'banner' && input.type !== 'divider' && input.props.variable === variable)
+							input.props.value = value;
 					});
 			});
 		} else {
 			$store.variables.forEach((group) =>
 				group.inputs.forEach((input) => {
-					if (input.details.variable === variable) input.details.value = value;
+					if (input.type !== 'banner' && input.type !== 'divider' && input.props.variable === variable)
+						input.props.value = value;
 				})
 			);
 		}
@@ -54,5 +57,5 @@
 </script>
 
 <template>
-	<svelte:component this={getType(data.type)} {...data.details} on:update={update} />
+	<svelte:component this={getType(data.type)} {...data.props} on:update={update} />
 </template>

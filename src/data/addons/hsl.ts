@@ -1,7 +1,7 @@
-import type { IAddon } from '$types/addon';
+import type { Addon } from '$types/addon';
 import Gibbu from '../devs/gibbu';
 
-const addon: IAddon = {
+const addon: Addon = {
 	name: 'Horizontal Server List',
 	description: 'Moves the server list from the left to the top of Discord.',
 	developer: Gibbu,
@@ -13,8 +13,7 @@ const addon: IAddon = {
 	variables: [
 		{
 			type: 'number',
-			details: {
-				addon: true,
+			props: {
 				variable: 'HSL-server-icon-size',
 				value: 45,
 				unit: 'px',
@@ -23,8 +22,7 @@ const addon: IAddon = {
 		},
 		{
 			type: 'number',
-			details: {
-				addon: true,
+			props: {
 				variable: 'HSL-server-spacing',
 				value: 10,
 				unit: 'px',
